@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "solito-expo-router",
+    "slug": "solito-expo-router",
+    "version": "1.0.0",
+    "scheme": "solito-expo-router",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.solito.expo-router"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "df1bb247-e72b-4f9d-936c-4294aa8ff6fa"
+      }
+    },
+    "android": {
+      "package": "com.ivan_goro.solitoexporouter"
+    }
+  }
+}
