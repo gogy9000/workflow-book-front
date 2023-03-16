@@ -14,14 +14,15 @@ export function UserDetailScreen() {
   const [id] = useParam('id')
 
   return (
-    <View
-      className={'flex-1 justify-center items-center'}
-      // sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-    >
-      <Text
-        className={'text-gray-500'}
-        // sx={{ textAlign: 'center', mb: 16, fontWeight: 'bold' }}
-      >{`User ID: ${id}`}</Text>
-    </View>
+    <></>
+    // <View
+    //   className={'flex-1 justify-center items-center'}
+    //   // sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    // >
+    //   <Text
+    //     className={'text-gray-500'}
+    //     // sx={{ textAlign: 'center', mb: 16, fontWeight: 'bold' }}
+    //   >{`User ID: ${id}`}</Text>
+    // </View>
   )
 }
