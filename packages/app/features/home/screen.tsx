@@ -1,12 +1,17 @@
-import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
-import { TextLink } from 'solito/link'
-import { MotiLink } from 'solito/moti'
+import {useSx} from 'dripsy'
+import { View } from 'app/design/view'
+import { H1 } from 'app/design/typography'
+
 
 export function HomeScreen() {
   const sx = useSx()
 
   return (
-    <></>
+    <View className={'flex-1 justify-center items-center'}>
+      <H1 sx={{fontWeight:'800'}}  className={'text-red-500 '}>home</H1>
+    </View>
+  )
+}
     // <View
     //   sx={{ flex: 1, justifyContent: 'center', alignItems: 'center', p: 16 }}
     // >
@@ -72,5 +77,4 @@ export function HomeScreen() {
     //     </MotiLink>
     //   </Row>
     // </View>
-  )
-}
+

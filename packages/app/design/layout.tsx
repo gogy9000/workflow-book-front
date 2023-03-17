@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { View } from 'dripsy'
 import { styled } from 'nativewind'
 
 export const Row = styled(View, "flex-row")
