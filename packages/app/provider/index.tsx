@@ -1,5 +1,12 @@
 import { Dripsy } from './dripsy'
+import { NativeBase } from 'app/provider/NativeBase'
 
 export function Provider({ children }: { children: React.ReactNode }) {
-  return <Dripsy>{children}</Dripsy>
+  return (
+    <NativeBase>
+      <Dripsy>
+        {children}
+      </Dripsy>
+    </NativeBase>
+  )
 }
