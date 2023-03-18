@@ -7,6 +7,8 @@ const withTM = require('next-transpile-modules')([
   'moti',
   'nativewind',
   'app',
+  "native-base",
+  "react-native-svg",
 ])
 
 /** @type {import('next').NextConfig} */

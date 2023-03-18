@@ -1,4 +1,4 @@
-import { TextInput as TextInputNative} from 'react-native'
 import { styled } from 'nativewind'
+import { Input } from 'native-base'
 
-export const TextInput = styled(TextInputNative)
+export const TextInput = styled(Input)
