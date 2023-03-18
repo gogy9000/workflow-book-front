@@ -14,7 +14,7 @@
   },
   "scripts": {
     "native": "cd apps/expo && expo start -c",
-    "web": "cd apps/next && yarn cache clean && yarn next"
+    "web": "cd apps/next && yarn next"
   },
   "resolutions": {
     "metro": "^0.73.1",

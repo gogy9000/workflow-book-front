@@ -1,14 +1,34 @@
-import {useSx} from 'dripsy'
+
 import { View } from 'app/design/view'
 import { H1 } from 'app/design/typography'
+import { MotiLink } from 'solito/moti'
 
 
 export function HomeScreen() {
-  const sx = useSx()
+
 
   return (
     <View className={'flex-1 justify-center items-center'}>
-      <H1 sx={{fontWeight:'800'}}  className={'text-red-500 '}>home</H1>
+      <MotiLink
+        href='/login'
+        animate={({ hovered, pressed }) => {
+          'worklet'
+          return {
+            scale: pressed ? 0.95 : hovered ? 1.1 : 1,
+            rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg'
+          }
+        }}
+        from={{
+          scale: 0,
+          rotateZ: '0deg'
+        }}
+        transition={{
+          type: 'timing',
+          duration: 150
+        }} style={undefined} onLayout={undefined}>
+        <H1 className={'text-red-500 '}>home</H1>
+      </MotiLink>
+
     </View>
   )
 }
