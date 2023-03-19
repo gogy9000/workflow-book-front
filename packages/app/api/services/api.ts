@@ -11,6 +11,6 @@ export const api=createApi({
     baseURL:'http://localhost:9000'
   }),
 
-  tagTypes: [...overTagsTypes],
+  tagTypes: [],
   endpoints: () => ({}),
 })
