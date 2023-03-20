@@ -8,9 +8,6 @@ const authEndpoints = api.injectEndpoints({
         url: '/auth/login',
         method: 'post',
         data,
-        customOptions: {
-          notToken: true
-        }
       })
 
     }),
@@ -19,9 +16,6 @@ const authEndpoints = api.injectEndpoints({
         url: '/auth/register',
         method: 'post',
         data,
-        customOptions: {
-          notToken: true
-        }
       })
     })
   }),

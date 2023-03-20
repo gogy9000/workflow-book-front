@@ -2,36 +2,42 @@
 import { View } from 'app/design/view'
 import { H1 } from 'app/design/typography'
 import { MotiLink } from 'solito/moti'
+import { Box } from 'app/design/layout'
+import { useGetTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 
 
 export function HomeScreen() {
-
-
+  const {data,isLoading,error}=useGetTasksQuery()
+  console.log(data)
   return (
-    <View className={'flex-1 justify-center items-center'}>
-      <MotiLink
-        href='/login'
-        animate={({ hovered, pressed }) => {
-          'worklet'
-          return {
-            scale: pressed ? 0.95 : hovered ? 1.1 : 1,
-            rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg'
-          }
-        }}
-        from={{
-          scale: 0,
-          rotateZ: '0deg'
-        }}
-        transition={{
-          type: 'timing',
-          duration: 150
-        }} style={undefined} onLayout={undefined}>
-        <H1 className={'text-red-500 '}>home</H1>
-      </MotiLink>
+    <Box className={'flex-1'}>
+      <H1>
+        Home
+      </H1>
 
-    </View>
+
+    </Box>
   )
 }
+// <MotiLink
+//   href='/login'
+//   animate={({ hovered, pressed }) => {
+//     'worklet'
+//     return {
+//       scale: pressed ? 0.95 : hovered ? 1.1 : 1,
+//       rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg'
+//     }
+//   }}
+//   from={{
+//     scale: 0,
+//     rotateZ: '0deg'
+//   }}
+//   transition={{
+//     type: 'timing',
+//     duration: 150
+//   }} style={undefined} onLayout={undefined}>
+//   <H1 className={'text-red-500 '}>home</H1>
+// </MotiLink>
     // <View
     //   sx={{ flex: 1, justifyContent: 'center', alignItems: 'center', p: 16 }}
     // >
