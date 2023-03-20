@@ -28,6 +28,7 @@ export const axiosRequestBaseQueryFn = ({baseURL=''}:{ baseURL?: string }): Base
       return { data: result };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
+
       return {
         error: {
           status: err.response?.status,

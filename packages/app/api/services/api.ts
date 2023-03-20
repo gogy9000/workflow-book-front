@@ -8,7 +8,7 @@ const overTagsTypes = new Set([
 export const api=createApi({
   reducerPath: 'api',
   baseQuery: axiosRequestBaseQueryFn({
-    baseURL:'http://localhost:9000'
+    baseURL:'http://192.168.78.103:9000/api'
   }),
 
   tagTypes: [],

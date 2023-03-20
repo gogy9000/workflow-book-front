@@ -116,6 +116,7 @@ export const request = async <RESPONSE, ERROR = any>(
     //     }, delayBeforeAutoHideSuccessToast);
     //   }
     // }
+
     return response.data;
   };
 
@@ -142,7 +143,7 @@ export const request = async <RESPONSE, ERROR = any>(
     //   }, delayBeforeAutoHideErrorToast);
     // }
 
-    console.log(error);
+    console.log(error?.response?.data);
     return Promise.reject(error);
   };
 
