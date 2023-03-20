@@ -5,4 +5,6 @@ export type TTaskResponse={
   "description": string,
   "userList": {},
   "report": {}
+  "createdAt":string,
+  "updatedAt":string
 }

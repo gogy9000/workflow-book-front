@@ -1,19 +1,40 @@
 
-import { View } from 'app/design/view'
 import { H1 } from 'app/design/typography'
-import { MotiLink } from 'solito/moti'
 import { Box } from 'app/design/layout'
 import { useGetTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { Table } from 'app/layouts/table/Table'
+import { BodyType } from 'app/layouts/table/table.types'
+import { TableActions } from 'app/layouts/table/table-actions/TableActions'
 
 
 export function HomeScreen() {
-  const {data,isLoading,error}=useGetTasksQuery()
-  console.log(data)
+  const {data,isLoading}=useGetTasksQuery()
+
+  const bodyData:BodyType=data?data.map(({id,location,title,description,createdAt,updatedAt})=>[
+    <TableActions id={id}  key={id}/>,title,location,description,
+    new Date(createdAt).toLocaleDateString('ru'),
+    new Date(updatedAt).toLocaleDateString('ru'),
+  ]):[]
   return (
-    <Box className={'flex-1'}>
+    <Box className={'flex-1 bg-gray-100'}>
       <H1>
         Home
       </H1>
+      <Table
+        isLoading={isLoading}
+        classNameHeadCell={'w-40'}
+        classNameBodyCell={'w-40'}
+        headData={[
+          'Действие',
+          'Название',
+          'Место',
+          'Задание',
+          'дата создания',
+          'Дата изменения'
+
+        ]}
+        bodyData={bodyData}
+      />
 
 
     </Box>

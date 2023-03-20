@@ -10,6 +10,7 @@ import { Row as RowNB,
   Heading as Head,
   FormControl,
   Input as Inp,
+  View as ViewNB
 } from 'native-base'
 
 import { styled } from 'nativewind'
@@ -26,6 +27,7 @@ export const Center = styled(Cent)
 export const Heading = styled(Head)
 export const FControl = styled(FormControl)
 export const Input = styled(Inp)
+export const View=styled(ViewNB)
 
 
 

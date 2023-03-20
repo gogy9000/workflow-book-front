@@ -14,7 +14,6 @@ instance.interceptors.request.use(async (value) => {
 })
 
 instance.interceptors.response.use(async (response) => {
-  console.log('write token', response.data.token)
   if (response && response.data && response.data.token) {
     await storage.setItem('token', response.data.token)
   }
