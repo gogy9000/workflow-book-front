@@ -7,6 +7,6 @@ export const api=createApi({
     baseURL:'http://192.168.78.103:9000/api'
   }),
 
-  tagTypes: [],
+  tagTypes: ['updateTask'],
   endpoints: () => ({}),
 })
