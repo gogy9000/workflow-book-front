@@ -14,7 +14,10 @@
   },
   "scripts": {
     "native": "cd apps/expo && expo start",
-    "web": "cd apps/next && yarn next"
+    "native-cline-cache": "cd apps/expo && expo start -c",
+    "web": "cd apps/next && yarn next",
+    "web-clean-cache": "cd apps/next && yarn cache clean && yarn next ",
+    "refresh-project": "del node_modules && cd apps/next && del node_modules && cd ../expo && del node_modules && cd ../../packages/app && yarn cache clean && yarn && del %localappdata%/Temp/haste-map-* && del %localappdata%/Temp/metro-cache"
   },
   "resolutions": {
     "metro": "^0.73.1",

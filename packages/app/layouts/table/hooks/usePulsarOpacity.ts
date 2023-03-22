@@ -12,7 +12,7 @@ export const usePulsarOpacity = ({
 	opacity = 0.1
 }: UsePulsarOpacityType) => {
 	const [flash, setFlash] = useState(false)
-	const [idInterval, setIdInterval] = useState<NodeJS.Timer|number>()
+	const [idInterval, setIdInterval] = useState<number>()
 
 	const animatedBackground = useAnimatedStyle(
 		() => ({
@@ -30,7 +30,7 @@ export const usePulsarOpacity = ({
 			let id = setInterval(() => {
 				setFlash(prev => !prev)
 			}, ms)
-			setIdInterval(id)
+			setIdInterval(id as unknown as number)
 		} else {
 			stopInterval()
 			setFlash(false)
