@@ -1,4 +1,4 @@
-import { DripsyProvider, makeTheme } from 'dripsy'
+import { DripsyProvider } from 'dripsy'
 import { useColorScheme } from 'react-native'
 import { theme, themeLight } from 'app/design/theme'
 

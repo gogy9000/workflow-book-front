@@ -12,9 +12,11 @@ interface IAuthLayoutProps {
   onSendButton: () => void
   buttonTitle?: string
   linkTitle?: string
+  isLoading?:boolean
 }
 
 export const AuthLayout: React.FC<IAuthLayoutProps> = memo(({
+                                                              isLoading,
                                                               onLink,
                                                               control,
                                                               title = 'Авторизация',
@@ -43,7 +45,7 @@ export const AuthLayout: React.FC<IAuthLayoutProps> = memo(({
         </Heading>
         <VStack space={3} mt='5'>
           <Field<TAuthPayload>
-            label={'Почта'} name={'email'} control={control} />
+            label={'Почта'} name={'email'} control={control} inputMode={'email'} />
           <Field<TAuthPayload>
             label={'Пароль'} name={'password'} control={control} type={'password'} />
           <Pressable onPress={onLink} className={'self-end'}>
@@ -54,7 +56,7 @@ export const AuthLayout: React.FC<IAuthLayoutProps> = memo(({
               {linkTitle}
             </Text>
           </Pressable>
-          <Button onPress={onSendButton} mt='2' colorScheme='indigo'>
+          <Button isLoading={isLoading} onPress={onSendButton} mt='2' colorScheme='indigo'>
             {buttonTitle}
           </Button>
         </VStack>
