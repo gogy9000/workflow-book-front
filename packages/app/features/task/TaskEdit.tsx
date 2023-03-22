@@ -9,9 +9,11 @@ import { setForms } from 'app/utils/typedEntries'
 import { TTaskResponse } from 'app/types/task.types'
 import { Selector } from 'app/design/ui/form-elements/selector'
 import { ItemType } from 'react-native-dropdown-picker'
+import { useRouter } from 'solito/router'
 
 const { useParam } = createParam()
 export const TaskEdit: React.FC = memo(() => {
+  const {push}=useRouter()
   const [id] = useParam('id')
   const { data } = useFindByIdQuery({ id: id as string }, { skip: !id })
   const [update] = useUpdateMutation()
@@ -20,7 +22,7 @@ export const TaskEdit: React.FC = memo(() => {
     setForms<TTaskResponse>(data, setValue)
   }, [data])
   const onSubmit = handleSubmit(async ({ description, location, title }) => {
-    console.log(data)
+
     await update({ id: id as string, data: { description, location, title } })
   })
 
@@ -38,6 +40,9 @@ export const TaskEdit: React.FC = memo(() => {
       label: 'label3'
     }
   ]
+  const onNavigateUserList = ()=>{
+    push(`/task/user-list/${id}/`)
+  }
   return (
     <Layout isHasPadding>
       <Center>
@@ -50,10 +55,11 @@ export const TaskEdit: React.FC = memo(() => {
             <Field<TTaskResponse> multiline numberOfLines={3} className={'font-semibold py-1 text-lg text-gray-500'}
                                   variant={'filled'}
                                   control={control} name={'description'} />
-            <View>
-            <Selector<TTaskResponse> control={control} name={'userList'} isMulti={true} options={options} />
-            </View>
-              <Button className={'self-stretch'} onPress={onSubmit} colorScheme={'indigo'}>Отправить</Button>
+            <HStack  className={'justify-end space-x-1'}>
+              <Selector<TTaskResponse> control={control} name={'userList'} style={{flex:1}} isMulti={true} options={options} />
+              <Button onPress={onNavigateUserList} my={'1'} rounded={'lg'}>Назначить</Button>
+            </HStack>
+            <Button className={'self-stretch'} onPress={onSubmit} colorScheme={'indigo'}>Отправить</Button>
 
             <HStack className={'self-stretch justify-between'}>
               <Text>

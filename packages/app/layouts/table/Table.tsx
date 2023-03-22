@@ -1,6 +1,6 @@
 import { ClassValue } from 'clsx'
 import React, { memo, useMemo } from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, View, ViewStyle } from 'react-native'
 import { BodyType, CellType, RowType } from 'app/layouts/table/table.types'
 import { TableBodySkeleton } from 'app/layouts/table/table-body/TableBodySceleton'
 import { TableBody } from './table-body/TableBody'
@@ -18,6 +18,8 @@ interface ITableProps {
 	classNameBodyCell?: ClassValue
 	classNameBodyCellText?: ClassValue
 	isLoading?: boolean
+	style?:ViewStyle,
+	className?:string
 }
 const defaultCell: CellType = ''
 const defaultRow: RowType = [defaultCell, defaultCell, defaultCell]
@@ -33,7 +35,9 @@ export const Table: React.FC<ITableProps> = memo(
 		classNameHeadRow,
 		headData = defaultRow,
 		bodyData = defaultBody,
-		isLoading
+		isLoading,
+		 style,
+		 className
 	}) => {
 		const tableBody = useMemo(
 			() =>
@@ -61,7 +65,7 @@ export const Table: React.FC<ITableProps> = memo(
 				scrollEventThrottle={16}
 				// showsHorizontalScrollIndicator={false}
 			>
-				<View>
+				<View style={style}>
 					<TableHead
 						classNameHeadCellText={classNameHeadCellText}
 						ClassNameTableHeadRow={classNameHeadRow}

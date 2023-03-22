@@ -1,11 +1,22 @@
-export type TTaskResponse={
+import { TUser } from 'app/types/user.types'
+
+export type TTask={
   "id": number,
   "title": string,
   "location": string,
   "description": string,
-  "userList": [],
+  "userList": TUser[],
   "report": {}
   "createdAt":string,
   "updatedAt":string
 }
-export type TTaskPayload=Partial<Omit<TTaskResponse, 'createdAt'|'updatedAt'|'id'>>
+
+export type TTaskResponse=TTask
+
+export type TTaskPayload=Partial<{
+  "title": string,
+  "location": string,
+  "description": string,
+  "userList": number[],
+  "report": {}
+}>

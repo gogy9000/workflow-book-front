@@ -23,7 +23,7 @@ export const Selector: React.FC<IDropDownProps> = memo(
     const [items, setItems] = useState(options)
     return (
       <View _web={{ mb: 0 }}
-            mb={'10'}>
+            mb={'10'} style={style}>
         <DropDownPicker
           // zIndex={3000}
           // zIndexInverse={1000}
@@ -43,14 +43,14 @@ export const Selector: React.FC<IDropDownProps> = memo(
           multiple={isMulti}
           mode={'BADGE'}
           // activityIndicatorColor='#BF3335'
-          style={[{
+          style={{
             // backgroundColor: '#9f9c9c',
             borderColor: error ? 'red' : 'transparent',
             flex: 1,
             alignSelf: 'flex-end',
             paddingHorizontal: 12,
             marginVertical: 3
-          }, style]}
+          }}
           textStyle={{
             fontSize: 16,
             fontWeight: '600',

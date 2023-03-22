@@ -5,6 +5,7 @@ import { useGetTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoint
 import { Table } from 'app/layouts/table/Table'
 import { BodyType } from 'app/layouts/table/table.types'
 import { TableActions } from 'app/layouts/table/table-actions/TableActions'
+import { Layout } from 'app/layouts/Layout'
 
 
 export function HomeScreen() {
@@ -16,6 +17,7 @@ export function HomeScreen() {
     new Date(updatedAt).toLocaleDateString('ru'),
   ]):[]
   return (
+    <Layout>
     <Box className={'flex-1 bg-gray-100'}>
       <H1>
         Home
@@ -38,6 +40,7 @@ export function HomeScreen() {
 
 
     </Box>
+    </Layout>
   )
 }
 // <MotiLink

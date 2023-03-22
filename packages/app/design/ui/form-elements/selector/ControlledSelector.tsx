@@ -2,6 +2,7 @@ import React from 'react'
 import { Control, Controller, FieldPath, FieldValues, RegisterOptions } from 'react-hook-form'
 import { Selector } from 'app/design/ui/form-elements/selector/Selector'
 import { ItemType } from 'react-native-dropdown-picker'
+import { ViewStyle } from 'react-native'
 
 
 
@@ -12,10 +13,11 @@ interface IControlledSelectorProps<T extends FieldValues> {
   name: FieldPath<T>
   isMulti: boolean
   options:ItemType<any>[]
+  style?:ViewStyle
 }
 
 export const ControlledSelector = <T extends Record<string, any>>
-({ control, rules, name, isMulti,options }: IControlledSelectorProps<T>) => {
+({ control, rules, name, isMulti,options,style }: IControlledSelectorProps<T>) => {
 
   return (
     <Controller
@@ -28,6 +30,7 @@ export const ControlledSelector = <T extends Record<string, any>>
           options={options}
           isMulti={isMulti}
           error={error}
+          style={style}
 
         />
       )}

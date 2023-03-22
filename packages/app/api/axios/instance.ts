@@ -22,7 +22,7 @@ instance.interceptors.response.use(async (response) => {
   },
   async (error: AxiosError) => {
     const { store } = await import('../../store')
-    const condition = error.isAxiosError && error.response && error.response.status >= 400 && error.response.status < 500
+    const condition = error.isAxiosError && error.response && error.response.status ===401
     if (condition) {
      await store.dispatch(setIsAuth(false))
     }
