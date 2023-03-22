@@ -12,7 +12,7 @@ export const usePulsarOpacity = ({
 	opacity = 0.1
 }: UsePulsarOpacityType) => {
 	const [flash, setFlash] = useState(false)
-	const [idInterval, setIdInterval] = useState<NodeJS.Timer>()
+	const [idInterval, setIdInterval] = useState<NodeJS.Timer|number>()
 
 	const animatedBackground = useAnimatedStyle(
 		() => ({
