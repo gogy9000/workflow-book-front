@@ -4,6 +4,7 @@ import { Selector } from 'app/design/ui/form-elements/selector/Selector'
 import { ItemType } from 'react-native-dropdown-picker'
 
 
+
 interface IControlledSelectorProps<T extends FieldValues> {
   control: Control<T>
   rules?: Omit<RegisterOptions<T, FieldPath<T>>,
@@ -27,9 +28,7 @@ export const ControlledSelector = <T extends Record<string, any>>
           options={options}
           isMulti={isMulti}
           error={error}
-          // style={{
-          //   zIndex: 11
-          // }}
+
         />
       )}
 
