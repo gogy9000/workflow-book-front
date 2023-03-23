@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react'
-import { Center, VStack, Text, HStack, Button, View } from 'app/design/layout'
+import { Center, VStack, Text, HStack, Button } from 'app/design/layout'
 import { createParam } from 'solito'
 import { useFindByIdQuery, useUpdateMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 import { Layout } from 'app/layouts/Layout'
@@ -8,8 +8,22 @@ import { Field } from 'app/design/ui/form-elements/field/Field'
 import { setForms } from 'app/utils/typedEntries'
 import { TTaskResponse } from 'app/types/task.types'
 import { Selector } from 'app/design/ui/form-elements/selector'
-import { ItemType } from 'react-native-dropdown-picker'
 import { useRouter } from 'solito/router'
+
+const options = [
+  {
+    value: 1,
+    label: 'label1'
+  },
+  {
+    value: 2,
+    label: 'label2'
+  },
+  {
+    value: 3,
+    label: 'label3'
+  }
+]
 
 const { useParam } = createParam()
 export const TaskEdit: React.FC = memo(() => {
@@ -25,24 +39,14 @@ export const TaskEdit: React.FC = memo(() => {
 
     await update({ id: id as string, data: { description, location, title } })
   })
-
-  const options: ItemType<number>[] = [
-    {
-      value: 1,
-      label: 'label1'
-    },
-    {
-      value: 2,
-      label: 'label2'
-    },
-    {
-      value: 3,
-      label: 'label3'
+  const onNavigateAndSubmit = handleSubmit(async ({ description, location, title }) => {
+   const res =await update({ id: id as string, data: { description, location, title } })
+    if('data' in res){
+      push(`/task/user-list/${id}/`)
     }
-  ]
-  const onNavigateUserList = ()=>{
-    push(`/task/user-list/${id}/`)
-  }
+  })
+
+
   return (
     <Layout isHasPadding>
       <Center>
@@ -57,7 +61,7 @@ export const TaskEdit: React.FC = memo(() => {
                                   control={control} name={'description'} />
             <HStack  className={'justify-end space-x-1'}>
               <Selector<TTaskResponse> control={control} name={'userList'} style={{flex:1}} isMulti={true} options={options} />
-              <Button onPress={onNavigateUserList} my={'1'} rounded={'lg'}>Назначить</Button>
+              <Button onPress={onNavigateAndSubmit} my={'1'} rounded={'lg'}>Назначить</Button>
             </HStack>
             <Button className={'self-stretch'} onPress={onSubmit} colorScheme={'indigo'}>Отправить</Button>
 

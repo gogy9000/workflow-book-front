@@ -144,6 +144,7 @@ export const request = async <RESPONSE, ERROR = any>(
     // }
 
     console.log(error?.response?.data);
+    console.log(error?.response?.status);
     return Promise.reject(error);
   };
 

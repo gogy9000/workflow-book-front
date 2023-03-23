@@ -5,7 +5,7 @@ import { createParam } from 'solito'
 import { Table } from 'app/layouts/table/Table'
 import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
 import { Checkbox } from 'native-base'
-import { Controller, useForm, useFormState } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { entries } from 'app/utils/typedEntries'
 import { useUpdateMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 import { useRouter } from 'solito/router'
@@ -28,7 +28,7 @@ export const UserList: React.FC = memo(() => {
           control={control}
           name={String(user.id)}
           render={({ field: { onChange, value } }) =>
-            <Checkbox onChange={onChange} isChecked={value} value={String(user.email)} />
+            <Checkbox accessibilityLabel={'checkbox'} onChange={onChange} isChecked={value||false} value={String(user.email||'')} />
           }
         />
         ,
@@ -59,7 +59,7 @@ export const UserList: React.FC = memo(() => {
     const userList = entries(data).reduce((acc: number[], [key, value]) => {
       return value ? [...acc, +key] : acc
     }, [])
-    console.log(userList)
+
     const res = await update({ id, data: { userList } })
     if ('data' in res) {
       push(`/task/${id}`)
