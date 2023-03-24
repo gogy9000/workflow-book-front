@@ -67,12 +67,14 @@ export const UserList: React.FC = memo(() => {
 
   })
   return (
-    <Layout>
+    <Layout isHasPadding>
       <Heading>Users</Heading>
       <Table
 
         headData={['назначить', 'почта', 'бан', 'причина бана']}
         bodyData={usersData}
+        classNameBodyCell={"w-40"}
+        classNameHeadCell={'w-40'}
       />
       <Button onPress={onSubmit}>OK</Button>
     </Layout>

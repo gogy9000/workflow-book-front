@@ -6,42 +6,51 @@ import { Layout } from 'app/layouts/Layout'
 import { useForm } from 'react-hook-form'
 import { Field } from 'app/design/ui/form-elements/field/Field'
 import { setForms } from 'app/utils/typedEntries'
-import { TTaskResponse } from 'app/types/task.types'
+import {  TTaskInput  } from 'app/types/task.types'
 import { Selector } from 'app/design/ui/form-elements/selector'
 import { useRouter } from 'solito/router'
 
-const options = [
-  {
-    value: 1,
-    label: 'label1'
-  },
-  {
-    value: 2,
-    label: 'label2'
-  },
-  {
-    value: 3,
-    label: 'label3'
-  }
-]
+
 
 const { useParam } = createParam()
 export const TaskEdit: React.FC = memo(() => {
-  const {push}=useRouter()
+  const { push } = useRouter()
   const [id] = useParam('id')
-  const { data } = useFindByIdQuery({ id: id as string }, { skip: !id })
-  const [update] = useUpdateMutation()
-  const { control, setValue, handleSubmit } = useForm<TTaskResponse>()
-  useEffect(() => {
-    setForms<TTaskResponse>(data, setValue)
-  }, [data])
-  const onSubmit = handleSubmit(async ({ description, location, title }) => {
+  const { control, setValue, handleSubmit } = useForm<TTaskInput>()
 
-    await update({ id: id as string, data: { description, location, title } })
+  const { data, options } = useFindByIdQuery({ id: id as string }, {
+    skip: !id,
+    selectFromResult: ({ data, ...rest }) => {
+      const inputData=data?{
+        title:data.title,
+        userList: data.userList.map(({ id }) => id),
+        location:data.location,
+        description:data.description
+      } as TTaskInput :undefined
+
+      inputData &&  setForms<TTaskInput>(inputData, setValue)
+
+      return ({
+        options: data ? data.userList.map(({ email, id }) => ({
+          label: email,
+          value: id
+        })) : [],
+        data,
+        ...rest
+      })
+    }
   })
-  const onNavigateAndSubmit = handleSubmit(async ({ description, location, title }) => {
-   const res =await update({ id: id as string, data: { description, location, title } })
-    if('data' in res){
+  const [update] = useUpdateMutation()
+
+  const onSubmit = handleSubmit(async ({ description, location, title,userList }) => {
+    await update({ id: id as string, data: { description, location, title,userList  } })
+
+  })
+  const onNavigateAndSubmit = handleSubmit(async ({ description, location, title,userList }) => {
+    console.log('userList',userList)
+    const res = await update({ id: id as string, data: { description, location, userList,title } })
+
+    if ('data' in res) {
       push(`/task/user-list/${id}/`)
     }
   })
@@ -52,15 +61,16 @@ export const TaskEdit: React.FC = memo(() => {
       <Center>
         {data ?
           <VStack w={'sm'} space={'xs'} className={'py-3 px-3 items-stretch  shadow-black-600 rounded-lg  bg-gray-200'}>
-            <Field<TTaskResponse> className={'font-semibold py-0 text-lg text-gray-500'} variant={'filled'}
+            <Field<TTaskInput> className={'font-semibold py-0 text-lg text-gray-500'} variant={'filled'}
                                   control={control} name={'title'} />
-            <Field<TTaskResponse> className={'font-semibold py-1 text-lg text-gray-500'} variant={'filled'}
+            <Field<TTaskInput> className={'font-semibold py-1 text-lg text-gray-500'} variant={'filled'}
                                   control={control} name={'location'} />
-            <Field<TTaskResponse> multiline numberOfLines={3} className={'font-semibold py-1 text-lg text-gray-500'}
+            <Field<TTaskInput> multiline numberOfLines={3} className={'font-semibold py-1 text-lg text-gray-500'}
                                   variant={'filled'}
                                   control={control} name={'description'} />
-            <HStack  className={'justify-end space-x-1'}>
-              <Selector<TTaskResponse> control={control} name={'userList'} style={{flex:1}} isMulti={true} options={options} />
+            <HStack className={'justify-end space-x-1'}>
+              <Selector<TTaskInput> control={control} name={'userList'} style={{ flex: 1 }} isMulti={true}
+                                       options={options} />
               <Button onPress={onNavigateAndSubmit} my={'1'} rounded={'lg'}>Назначить</Button>
             </HStack>
             <Button className={'self-stretch'} onPress={onSubmit} colorScheme={'indigo'}>Отправить</Button>

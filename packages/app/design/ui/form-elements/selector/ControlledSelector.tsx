@@ -23,17 +23,21 @@ export const ControlledSelector = <T extends Record<string, any>>
     <Controller
       control={control}
       name={name}
-      rules={rules}
-      render={({ field, fieldState: { error } }) => (
-        <Selector
-          field={field}
-          options={options}
-          isMulti={isMulti}
-          error={error}
-          style={style}
 
-        />
-      )}
+      rules={rules}
+      render={({ field:{value,onChange}, fieldState: { error } }) => {
+      return  (
+          <Selector
+            value={value}
+            onChange={onChange}
+            options={options}
+            isMulti={isMulti}
+            error={error}
+            style={style}
+
+          />
+        )
+      }}
 
     />
   )

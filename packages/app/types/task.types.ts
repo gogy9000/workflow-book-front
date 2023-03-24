@@ -13,6 +13,10 @@ export type TTask={
 
 export type TTaskResponse=TTask
 
+export type TTaskInput=Omit<TTask,'createdAt'|'updatedAt'|'id'|'userList'>&{
+  userList:number[]
+}
+
 export type TTaskPayload=Partial<{
   "title": string,
   "location": string,
@@ -20,3 +24,4 @@ export type TTaskPayload=Partial<{
   "userList": number[],
   "report": {}
 }>
+
