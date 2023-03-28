@@ -7,17 +7,17 @@ import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
 import { Checkbox } from 'native-base'
 import { Controller, useForm } from 'react-hook-form'
 import { entries } from 'app/utils/typedEntries'
-import { useUpdateMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 import { useRouter } from 'solito/router'
 
 const { useParam } = createParam<{ id: string }>()
 
 
 export const UserList: React.FC = memo(() => {
-  const { push } = useRouter()
+  const { back } = useRouter()
   const [id] = useParam('id')
   const { control, handleSubmit, setValue } = useForm<{[k:string]:boolean}>()
-  const [update] = useUpdateMutation()
+  const [update] = useUpdateTaskMutation()
 
   const { usersData,data } = useGetAllUsersQuery
   ('', {
@@ -62,7 +62,7 @@ export const UserList: React.FC = memo(() => {
 
     const res = await update({ id, data: { userList } })
     if ('data' in res) {
-      push(`/task/${id}`)
+      back()
     }
 
   })

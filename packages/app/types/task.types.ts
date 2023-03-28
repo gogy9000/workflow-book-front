@@ -1,4 +1,5 @@
 import { TUser } from 'app/types/user.types'
+import { TReport } from 'app/types/report.types'
 
 export type TTask={
   "id": number,
@@ -22,6 +23,6 @@ export type TTaskPayload=Partial<{
   "location": string,
   "description": string,
   "userList": number[],
-  "report": {}
+  "report": TReport
 }>
 

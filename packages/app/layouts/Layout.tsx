@@ -25,7 +25,7 @@ export const Layout: React.FC<PropsWithChildren<ILayout>> = memo(
           })}
           style={[
             {
-              paddingTop: Platform.OS === 'ios' ? top / 6 : top * 0.3
+              paddingTop: Platform.OS === 'ios' ? top / 6 :Platform.OS==='android'? top * 0.3:10
             },
             style
           ]}

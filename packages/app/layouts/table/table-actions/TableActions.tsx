@@ -5,19 +5,20 @@ import { Text } from 'app/design/layout'
 
 
 interface ITableActionsProps {
-id:number
+
+  href: string
 }
 
 export const TableActions: React.FC<ITableActionsProps> = memo(
-  ({id}) => {
+  ({ href }) => {
     return (
 
       <MotiLink
-        href={`/task/${id}`}
+        href={href}
         animate={({ hovered, pressed }) => {
           'worklet'
           return {
-            scale: pressed ? 0.95 : hovered ? 1.1 : 1,
+            scale: pressed ? 0.95 : hovered ? 1.1 : 1
             // rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg'
           }
         }}

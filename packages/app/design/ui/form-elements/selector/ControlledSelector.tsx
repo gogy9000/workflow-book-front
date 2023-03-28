@@ -26,6 +26,7 @@ export const ControlledSelector = <T extends Record<string, any>>
 
       rules={rules}
       render={({ field:{value,onChange}, fieldState: { error } }) => {
+        console.log('ControlledSelector',value)
       return  (
           <Selector
             value={value}

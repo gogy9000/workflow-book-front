@@ -1,19 +1,30 @@
 import { api } from 'app/api/services/api'
 import { TTaskPayload, TTaskResponse } from 'app/types/task.types'
 
+const getTaskUrl=(param?:string)=>param?`/tasks/${param}`:'/tasks'
+
 const tasksEndpoints=api.injectEndpoints({
   endpoints:(build)=>({
-    getTasks:build.query<TTaskResponse[],void>({
-      query:()=>({method:'get',url:'/task'})
+    getAllTasks:build.query<TTaskResponse[], { category?: 'issued' | 'received' }>({
+      query:({ category })=>({method:'get',url:getTaskUrl(category)}),
+      providesTags:['updateTask','createTask']
     }),
-    findById:build.query<TTaskResponse, { id:string }>({
-      query:({id})=>({method:'get',url:`/task/${id}`}),
-      providesTags:['updateTask']
+    findTaskById:build.query<TTaskResponse, { id:string }>({
+      query:({id})=>({method:'get',url:`/tasks/task/${id}`}),
+      providesTags:['updateTask','createTask']
     }),
-    update:build.mutation<TTaskResponse,{id:string ,data:TTaskPayload}>({
+    createTask:build.mutation<TTaskResponse,void>({
+      query:()=>({
+        url:'/tasks',
+        method:'post',
+        data:{}
+      }),
+      invalidatesTags:['createTask']
+    }),
+    updateTask:build.mutation<TTaskResponse,{id:string ,data:TTaskPayload}>({
       query:({id,data})=>({
         method:'put',
-        url:`/task/${id}`,
+        url:`/tasks/${id}`,
         data
       }),
       invalidatesTags:['updateTask']
@@ -22,4 +33,4 @@ const tasksEndpoints=api.injectEndpoints({
   }),
   overrideExisting:true
 })
-export const {useGetTasksQuery,useFindByIdQuery,useUpdateMutation}=tasksEndpoints
+export const {useGetAllTasksQuery,useFindTaskByIdQuery,useUpdateTaskMutation,useCreateTaskMutation}=tasksEndpoints

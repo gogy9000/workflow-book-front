@@ -4,6 +4,7 @@ import { Platform, ViewStyle } from 'react-native'
 
 import DropDownPicker, { ItemType } from 'react-native-dropdown-picker'
 import { View, Text } from 'app/design/layout'
+import { useNavigation } from 'solito/build/router/use-navigation'
 
 interface IDropDownProps {
   options?: ItemType<any>[]
@@ -12,27 +13,28 @@ interface IDropDownProps {
   onChange: (...args: any[]) => void
   error?: FieldError
   style?: ViewStyle
+  defaultValue?:any[]
 }
 
 DropDownPicker.setTheme('LIGHT')
 DropDownPicker.setListMode('SCROLLVIEW')
 
 export const Selector: React.FC<IDropDownProps> =
-  ({ error, style, options = [], value = [], isMulti, onChange }) => {
+  ({ error, style, options = [], value = [], isMulti, onChange,defaultValue }) => {
     const [open, setOpen] = useState(false)
     const [currentValue, setCurrentValue] = useState<number[] | null>(null)
     const [items, setItems] = useState<ItemType<number>[]>(options)
 
-
     useEffect(() => {
-      if (!currentValue && value.length) {
+      if (currentValue?.length !== value.length) {
         setCurrentValue(value)
       }
     }, [value])
 
-
-    const onChangeValue = async (value) => {
-      value && onChange(value)
+    const onChangeValue =  (value:any[]) => {
+      if(value!==null){
+        onChange(value)
+      }
     }
 
     useEffect(() => {
@@ -43,24 +45,28 @@ export const Selector: React.FC<IDropDownProps> =
       }
     }, [currentValue])
 
+    const setValue=(callback)=>{
+      setCurrentValue(callback)
+    }
+
     return (
       <View _web={{ mb: 0 }}
             mb={'10'} style={style}>
         <DropDownPicker
+          onChangeValue={onChangeValue}
           // zIndex={3000}
           // zIndexInverse={1000}
           open={open}
           value={currentValue}
           items={items}
           setOpen={setOpen}
-          setValue={setCurrentValue}
+          setValue={setValue}
           setItems={setItems}
-          onChangeValue={onChangeValue}
           modalAnimationType='fade'
           containerStyle={{
             zIndex: 10
           }}
-          multiple={!!isMulti}
+          multiple={true}
           mode={'BADGE'}
           // activityIndicatorColor='#BF3335'
           style={{
