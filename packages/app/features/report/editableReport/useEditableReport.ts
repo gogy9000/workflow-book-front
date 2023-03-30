@@ -34,7 +34,7 @@ export const useEditableReport = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (id && report){
       const {title,userList,location,description}=data
-      const payload:TReportPayload={title,userList,location,description,taskId:report.taskId}
+      const payload:TReportPayload={title,userList,location,description,taskId:report.taskId,phase:'ready'}
       const res=await update({id, data:payload})
       if ('data' in res){
         back()

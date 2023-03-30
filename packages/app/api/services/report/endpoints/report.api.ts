@@ -7,13 +7,15 @@ const reportApi=api.injectEndpoints({
       query:()=>({
         method:'get',
         url:'/reports'
-      })
+      }),
+      providesTags:['updateReport']
     }),
     findReportById:query<TReport,{id:string}>({
       query:({id})=>({
         method:'get',
         url:`/reports/${id}`
-      })
+      }),
+      providesTags:['updateReport']
     }),
     createReport:mutation<TReport,{taskId:number}>({
       query:({taskId})=>({
@@ -27,7 +29,8 @@ const reportApi=api.injectEndpoints({
         method: 'put',
         url: `/reports/${id}`,
         data
-      })
+      }),
+      invalidatesTags:['updateReport']
     })
   }),
 })

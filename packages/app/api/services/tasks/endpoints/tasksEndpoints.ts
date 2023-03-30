@@ -7,11 +7,11 @@ const tasksEndpoints=api.injectEndpoints({
   endpoints:(build)=>({
     getAllTasks:build.query<TTaskResponse[], { category?: 'issued' | 'received' }>({
       query:({ category })=>({method:'get',url:getTaskUrl(category)}),
-      providesTags:['updateTask','createTask']
+      providesTags:['updateTask','createTask','updateReport']
     }),
     findTaskById:build.query<TTaskResponse, { id:string }>({
       query:({id})=>({method:'get',url:`/tasks/task/${id}`}),
-      providesTags:['updateTask','createTask']
+      providesTags:['updateTask','createTask','updateReport']
     }),
     createTask:build.mutation<TTaskResponse,void>({
       query:()=>({

@@ -11,23 +11,28 @@ import { ReportAndTaskView } from 'app/design/ui/reportAndTaskView/ReportAndTask
 const { useParam } = createParam()
 
 export const ReceivedTask: React.FC = memo(() => {
-  const {push}=useRouter()
+  const { push } = useRouter()
   const [id] = useParam('id')
   const { data, isLoading } = useFindTaskByIdQuery({ id: id as string }, { skip: !id })
-  const [create]=useCreateReportMutation()
+  const [create] = useCreateReportMutation()
 
-  const onNavigateToReport =async()=>{
-    if(!id) return;
-    if(data && data.report && data.report.taskId){
+  const onNavigateToReport = async () => {
+    if (!id) return;
+    if (data && data.phase === 'creation') {
+      console.log('задание не подписано')
+      return
+    }
+    if (data && data.report && data.report.phase === 'ready') {
       push(`/read-report/${data.report.id}`)
-      return;
+      return
     }
-    if(data && data.report && data.report.id){
+
+    if (data && data.report && data.report.id) {
       push(`/write-report/${data.report.id}`)
-      return;
+      return
     }
-    const res= await create({taskId:+id})
-    if ('data' in res){
+    const res = await create({ taskId: +id })
+    if ('data' in res) {
       push(`/write-report/${res.data.id}`)
     }
   }
@@ -35,14 +40,14 @@ export const ReceivedTask: React.FC = memo(() => {
   if (isLoading) {
     return <Spinner size={'lg'} />
   }
-
+  console.log(data)
   return (
     <Layout isLoading={isLoading} className={'bg-gray-200'} isHasPadding>
       {
         data ? (
           <ReportAndTaskView
-            buttonTitle={"Отчет"}
-            manager={data.manager.email}
+            buttonTitle={'Отчет'}
+            manager={data.author?.email}
             heading={'Задание'}
             title={data.title}
             location={data.location}
@@ -53,7 +58,6 @@ export const ReceivedTask: React.FC = memo(() => {
           />
         ) : null
       }
-
     </Layout>
   )
 })

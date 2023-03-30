@@ -7,11 +7,14 @@ export type TTask = {
   'location': string,
   'description': string,
   'userList': TUser[],
-  'report': TReport|null,
-  'manager': TUser,
-  'managerId': number,
+  'report': TReport | null,
+  'manager': TUser | null,
+  'author': TUser | null
+  'managerId': number | null,
+  'authorId': number | null,
   'createdAt': string,
   'updatedAt': string
+  'phase':"creation"|"ready"
 }
 
 export type TTaskResponse = TTask
@@ -25,6 +28,6 @@ export type TTaskPayload = Partial<{
   'location': string,
   'description': string,
   'userList': number[],
-  'report': TReport
+  'phase': 'creation'|'ready'
 }>
 

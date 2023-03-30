@@ -11,6 +11,9 @@ export type TReport={
   "taskId": number
   createdAt: string
   updatedAt:string
+  'phase':"creation"|"ready"
+  'author':TUser|null
+  'authorId':number|null
 
 }
 export type TReportPayload=Partial<Omit<TReport, 'id' | 'taskId'|'userList'>> & {

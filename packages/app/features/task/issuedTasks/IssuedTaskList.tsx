@@ -17,7 +17,7 @@ export const IssuedTaskList: React.FC = memo(({}) => {
     if(!data) return [];
 
    return  data.map(({ report, id, location, title, description, createdAt, updatedAt }) => {
-      const href=report?`/received-task/${id}`:`/issued-task/${id}`
+      const href=report && report.phase==='ready'?`/received-task/${id}`:`/issued-task/${id}`
       return [
         <TableActions href={href} key={id} />, title, location, description,
         new Date(createdAt).toLocaleDateString('ru'),
