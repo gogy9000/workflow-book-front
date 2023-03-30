@@ -7,7 +7,7 @@ export type TTask = {
   'location': string,
   'description': string,
   'userList': TUser[],
-  'report': TReport,
+  'report': TReport|null,
   'manager': TUser,
   'managerId': number,
   'createdAt': string,

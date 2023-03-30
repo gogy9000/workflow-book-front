@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useCreateTaskMutation, useGetAllTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 import { BodyType } from 'app/layouts/table/table.types'
 import { TableActions } from 'app/layouts/table/table-actions/TableActions'
@@ -10,12 +10,23 @@ import { useRouter } from 'solito/router'
 export const IssuedTaskList: React.FC = memo(({}) => {
   const {push}=useRouter()
   const { data, isLoading } = useGetAllTasksQuery({ category:'issued' })
-  const bodyData: BodyType = data ? data.map(({ id, location, title, description, createdAt, updatedAt }) => [
-    <TableActions href={`/issued-task/${id}`} key={id} />, title, location, description,
-    new Date(createdAt).toLocaleDateString('ru'),
-    new Date(updatedAt).toLocaleDateString('ru')
-  ]) : []
+
   const [create,{isLoading:isLoadingCreate}]=useCreateTaskMutation()
+
+  const bodyData=useMemo<BodyType>(()=>{
+    if(!data) return [];
+
+   return  data.map(({ report, id, location, title, description, createdAt, updatedAt }) => {
+      const href=report?`/received-task/${id}`:`/issued-task/${id}`
+      return [
+        <TableActions href={href} key={id} />, title, location, description,
+        new Date(createdAt).toLocaleDateString('ru'),
+        new Date(updatedAt).toLocaleDateString('ru')
+      ]
+    })
+
+  },[data])
+
 
   const onAddButton= async ()=>{
   const res= await create()

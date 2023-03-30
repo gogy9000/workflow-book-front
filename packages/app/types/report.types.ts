@@ -7,7 +7,7 @@ export type TReport={
   "location":string,
   "description": string,
   "userList": TUser[],
-  "task": TTask
+  "task": TTask|undefined
   "taskId": number
   createdAt: string
   updatedAt:string
