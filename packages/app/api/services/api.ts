@@ -4,7 +4,7 @@ import { createApi } from '@reduxjs/toolkit/dist/query/react'
 export const api=createApi({
   reducerPath: 'api',
   baseQuery: axiosRequestBaseQueryFn({
-    baseURL:'http://192.168.170.103:9000/api'
+    baseURL:'http://192.168.152.103:9000/api'
   }),
 
   tagTypes: ['updateTask','createTask'],

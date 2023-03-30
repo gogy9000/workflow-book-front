@@ -20,9 +20,7 @@ export const IssuedTaskList: React.FC = memo(({}) => {
   const onAddButton= async ()=>{
   const res= await create()
     if('data' in res ){
-      push({
-        pathname:`/issued-task/${res.data.id}`,
-      })
+      push(`/issued-task/${res.data.id}`)
     }
   }
   return (

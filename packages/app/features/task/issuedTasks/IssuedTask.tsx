@@ -1,16 +1,11 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
-import { Center, VStack, Text, HStack, Button } from 'app/design/layout'
+import React, { memo, useEffect } from 'react'
 import { createParam } from 'solito'
 import { useFindTaskByIdQuery, useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
 import { Layout } from 'app/layouts/Layout'
 import { useForm } from 'react-hook-form'
-import { Field } from 'app/design/ui/form-elements/field/Field'
 import { setForms } from 'app/utils/typedEntries'
-import { TTaskInput } from 'app/types/task.types'
-import { Selector } from 'app/design/ui/form-elements/selector'
 import { useRouter } from 'solito/router'
 import { useNavigation } from 'solito/build/router/use-navigation'
-import { UncontrolledSelector } from 'app/design/ui/form-elements/selector/UncontrolledSelector'
 import { InputForm } from 'app/design/ui/InputForm/InputForm'
 import { TEditInput } from 'app/types/editInput.types'
 
@@ -23,7 +18,7 @@ export const IssuedTask: React.FC = memo(() => {
   const [id] = useParam('id')
   const { control, setValue, handleSubmit } = useForm<TEditInput>()
 
-  const { data, options, inputData, isSuccess } = useFindTaskByIdQuery({ id: id as string }, {
+  const { data, inputData, isSuccess } = useFindTaskByIdQuery({ id: id as string }, {
     skip: !id,
     selectFromResult: ({ data, ...rest }) => {
       const inputData = data ? {

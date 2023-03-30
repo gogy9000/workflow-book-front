@@ -9,16 +9,22 @@ const reportApi=api.injectEndpoints({
         url:'/reports'
       })
     }),
-    createReport:mutation<TReport,void>({
-      query:()=>({
-        method: 'post',
-        url: '/reports',
-        data:{}
+    findReportById:query<TReport,{id:string}>({
+      query:({id})=>({
+        method:'get',
+        url:`/reports/${id}`
       })
     }),
-    updateReport:mutation<TReport, {id:number, data:TReportPayload }>({
-      query:({ id, data })=>({
+    createReport:mutation<TReport,{taskId:number}>({
+      query:({taskId})=>({
         method: 'post',
+        url: '/reports',
+        data:{taskId}
+      })
+    }),
+    updateReport:mutation<TReport, {id:string, data:TReportPayload }>({
+      query:({ id, data })=>({
+        method: 'put',
         url: `/reports/${id}`,
         data
       })
@@ -26,4 +32,4 @@ const reportApi=api.injectEndpoints({
   }),
 })
 
-export const {useGetAllReportsQuery}=reportApi
+export const {useGetAllReportsQuery,useFindReportByIdQuery,useCreateReportMutation,useUpdateReportMutation}=reportApi
