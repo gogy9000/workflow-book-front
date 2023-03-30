@@ -1,10 +1,9 @@
-import React, { memo, useEffect, useState } from 'react'
-import { ControllerRenderProps, FieldError } from 'react-hook-form'
+import React, { SetStateAction, useEffect, useState } from 'react'
+import { FieldError } from 'react-hook-form'
 import { Platform, ViewStyle } from 'react-native'
 
 import DropDownPicker, { ItemType } from 'react-native-dropdown-picker'
 import { View, Text } from 'app/design/layout'
-import { useNavigation } from 'solito/build/router/use-navigation'
 
 interface IDropDownProps {
   options?: ItemType<any>[]
@@ -13,14 +12,14 @@ interface IDropDownProps {
   onChange: (...args: any[]) => void
   error?: FieldError
   style?: ViewStyle
-  defaultValue?:any[]
+  defaultValue?: any[]
 }
 
 DropDownPicker.setTheme('LIGHT')
 DropDownPicker.setListMode('SCROLLVIEW')
 
 export const Selector: React.FC<IDropDownProps> =
-  ({ error, style, options = [], value = [], isMulti, onChange,defaultValue }) => {
+  ({ error, style, options = [], value = [], isMulti, onChange, defaultValue }) => {
     const [open, setOpen] = useState(false)
     const [currentValue, setCurrentValue] = useState<number[] | null>(null)
     const [items, setItems] = useState<ItemType<number>[]>(options)
@@ -31,8 +30,8 @@ export const Selector: React.FC<IDropDownProps> =
       }
     }, [value])
 
-    const onChangeValue =  (value:any[]) => {
-      if(value!==null){
+    const onChangeValue = (value: any[]) => {
+      if (value !== null) {
         onChange(value)
       }
     }
@@ -45,7 +44,7 @@ export const Selector: React.FC<IDropDownProps> =
       }
     }, [currentValue])
 
-    const setValue=(callback)=>{
+    const setValue = (callback: SetStateAction<number[] | null>) => {
       setCurrentValue(callback)
     }
 
