@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import { createParam } from 'solito'
-import { useFindTaskByIdQuery, useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useFindTaskByIdQuery, useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasks.api'
 import { Layout } from 'app/layouts/Layout'
 import { useForm } from 'react-hook-form'
 import { setForms } from 'app/utils/typedEntries'
@@ -73,7 +73,7 @@ export const IssuedTask: React.FC = memo(() => {
 
 
   return (
-    <Layout isHasPadding>
+    <Layout  isHasPadding>
       <InputForm
         control={control}
         inputData={inputData}
@@ -81,6 +81,8 @@ export const IssuedTask: React.FC = memo(() => {
         onSubmit={onSubmit}
         createdAt={data?.createdAt}
         updatedAt={data?.updatedAt}
+        buttonTitle={'Отправить'}
+        heading={'Задание'}
       />
     </Layout>
   )

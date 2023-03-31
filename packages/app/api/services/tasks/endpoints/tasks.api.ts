@@ -3,7 +3,7 @@ import { TTaskPayload, TTaskResponse } from 'app/types/task.types'
 
 const getTaskUrl=(param?:string)=>param?`/tasks/${param}`:'/tasks'
 
-const tasksEndpoints=api.injectEndpoints({
+const tasksApi=api.injectEndpoints({
   endpoints:(build)=>({
     getAllTasks:build.query<TTaskResponse[], { category?: 'issued' | 'received' }>({
       query:({ category })=>({method:'get',url:getTaskUrl(category)}),
@@ -33,4 +33,4 @@ const tasksEndpoints=api.injectEndpoints({
   }),
   overrideExisting:true
 })
-export const {useGetAllTasksQuery,useFindTaskByIdQuery,useUpdateTaskMutation,useCreateTaskMutation}=tasksEndpoints
+export const {useGetAllTasksQuery,useFindTaskByIdQuery,useUpdateTaskMutation,useCreateTaskMutation}=tasksApi

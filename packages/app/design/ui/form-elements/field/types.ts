@@ -15,4 +15,5 @@ export interface IFieldProps<T extends FieldValues>
     'valueAsNumber' | 'valueAsDate' | 'disabled'>
   viewClassName?: ClassValue
   label?: string
+  style?:string
 }

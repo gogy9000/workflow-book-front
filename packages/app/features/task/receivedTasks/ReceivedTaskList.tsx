@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Heading, HStack, VStack } from 'app/design/layout'
 import { Table } from 'app/layouts/table/Table'
-import { useGetAllTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useGetAllTasksQuery } from 'app/api/services/tasks/endpoints/tasks.api'
 import { BodyType } from 'app/layouts/table/table.types'
 import { TableActions } from 'app/layouts/table/table-actions/TableActions'
 

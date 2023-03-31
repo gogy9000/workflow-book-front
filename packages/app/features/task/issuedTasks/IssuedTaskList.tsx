@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react'
-import { useCreateTaskMutation, useGetAllTasksQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useCreateTaskMutation, useGetAllTasksQuery } from 'app/api/services/tasks/endpoints/tasks.api'
 import { BodyType } from 'app/layouts/table/table.types'
 import { TableActions } from 'app/layouts/table/table-actions/TableActions'
 import {  Button, Heading, HStack } from 'app/design/layout'

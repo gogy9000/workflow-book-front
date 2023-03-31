@@ -16,6 +16,8 @@ export const EditableReport: React.FC = memo(() => {
         onSubmit={onSubmit}
         createdAt={createdAt}
         updatedAt={updatedAt}
+        buttonTitle={'Отправить'}
+        heading={'Отчет'}
       />
     </Layout>
   )

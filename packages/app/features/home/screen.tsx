@@ -2,10 +2,8 @@
 
 import { IssuedTaskList } from 'app/features/task/issuedTasks/IssuedTaskList'
 import { Box } from 'app/design/layout'
-import { H1 } from 'app/design/typography'
 import { Layout } from 'app/layouts/Layout'
 import React from 'react'
-import { ReportList } from 'app/features/report/ReportList'
 import { ReceivedTaskList } from 'app/features/task/receivedTasks/ReceivedTaskList'
 
 
@@ -16,7 +14,6 @@ export function HomeScreen() {
       <Box className={'flex-1 bg-gray-100'}>
         <IssuedTaskList/>
         <ReceivedTaskList/>
-        <ReportList/>
       </Box>
     </Layout>
 

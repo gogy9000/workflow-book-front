@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { Layout } from 'app/layouts/Layout'
-import { useFindTaskByIdQuery } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useFindTaskByIdQuery } from 'app/api/services/tasks/endpoints/tasks.api'
 import { createParam } from 'solito'
 import { Spinner } from 'native-base'
 import { useRouter } from 'solito/router'

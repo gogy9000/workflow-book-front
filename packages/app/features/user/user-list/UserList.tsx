@@ -7,7 +7,7 @@ import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
 import { Checkbox } from 'native-base'
 import { Controller, useForm } from 'react-hook-form'
 import { entries } from 'app/utils/typedEntries'
-import { useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasksEndpoints'
+import { useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasks.api'
 import { useRouter } from 'solito/router'
 
 const { useParam } = createParam<{ id: string }>()
