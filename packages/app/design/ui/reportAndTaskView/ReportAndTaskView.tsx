@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Box, Button, Center, HStack, VStack, Text } from 'app/design/layout'
 import { Divider } from 'native-base'
 
@@ -12,6 +12,8 @@ interface IReportAndTaskViewProps {
   onNavigate: () => void
   heading: string
   buttonTitle: string
+  reportOfficer?: string
+  employees?: string[]
 }
 
 export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
@@ -23,9 +25,14 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
                                                                             createdAt,
                                                                             author,
                                                                             onNavigate,
-                                                                            buttonTitle
+                                                                            buttonTitle,
+                                                                            reportOfficer,
+                                                                            employees
                                                                           }) => {
-
+  const mappedEmployees = useMemo(() => {
+    if (!employees) return
+    return employees.map((employee) => (<Text key={employee} className={'font-semibold'}>{employee}</Text>))
+  }, [employees])
   return (
     <Box>
       <Center>
@@ -48,6 +55,12 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
               <Text className={'font-semibold '}> {description}</Text>
             </Box>
           </VStack>
+          {mappedEmployees ?
+            (<VStack>
+              <Text className={'font-semibold text-gray-500'}>Ответственные за работу:</Text>
+              {mappedEmployees}
+            </VStack>)
+            : null}
           <VStack>
             <Text className={'font-semibold text-gray-500'}>Создано:</Text>
             <HStack className={'space-x-0.5'}>
@@ -74,6 +87,12 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
             (<VStack>
               <Text className={'font-semibold text-gray-500'}>Выдал:</Text>
               <Text className={'font-semibold'}>{author}</Text>
+            </VStack>)
+            : null}
+          {reportOfficer ?
+            (<VStack>
+              <Text className={'font-semibold text-gray-500'}>Ответственный за выполнение:</Text>
+              <Text className={'font-semibold'}>{reportOfficer}</Text>
             </VStack>)
             : null}
           <Divider />

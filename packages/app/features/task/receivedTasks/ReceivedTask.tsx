@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Layout } from 'app/layouts/Layout'
 import { useFindTaskByIdQuery } from 'app/api/services/tasks/endpoints/tasks.api'
 import { createParam } from 'solito'
@@ -15,6 +15,11 @@ export const ReceivedTask: React.FC = memo(() => {
   const [id] = useParam('id')
   const { data, isLoading } = useFindTaskByIdQuery({ id: id as string }, { skip: !id })
   const [create] = useCreateReportMutation()
+
+  const employees=useMemo(()=>{
+    if (!data) return
+    return data.userList.map(({email})=>email)
+  },[data])
 
   const onNavigateToReport = async () => {
     if (!id) return;
@@ -46,6 +51,7 @@ export const ReceivedTask: React.FC = memo(() => {
       {
         data ? (
           <ReportAndTaskView
+            reportOfficer={data.reportOfficer?.email}
             buttonTitle={'Отчет'}
             author={data.author?.email}
             heading={'Задание'}
@@ -55,6 +61,7 @@ export const ReceivedTask: React.FC = memo(() => {
             onNavigate={onNavigateToReport}
             updatedAt={data.updatedAt}
             createdAt={data.createdAt}
+            employees={employees}
           />
         ) : null
       }
