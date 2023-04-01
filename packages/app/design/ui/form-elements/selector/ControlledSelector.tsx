@@ -11,22 +11,22 @@ interface IControlledSelectorProps<T extends FieldValues> {
   rules?: Omit<RegisterOptions<T, FieldPath<T>>,
     'valueAsNumber' | 'valueAsDate' | 'disabled'>
   name: FieldPath<T>
-  isMulti: boolean
+  isMulti?: boolean
   options:ItemType<any>[]
   style?:ViewStyle
+  defaultValue:any[]|any|null
+  className?:string
 }
 
 export const ControlledSelector = <T extends Record<string, any>>
-({ control, rules, name, isMulti,options,style }: IControlledSelectorProps<T>) => {
+({ control, rules, name, isMulti,options,style,defaultValue,className }: IControlledSelectorProps<T>) => {
 
   return (
     <Controller
       control={control}
       name={name}
-
       rules={rules}
       render={({ field:{value,onChange}, fieldState: { error } }) => {
-        console.log('ControlledSelector',value)
       return  (
           <Selector
             value={value}
@@ -35,7 +35,8 @@ export const ControlledSelector = <T extends Record<string, any>>
             isMulti={isMulti}
             error={error}
             style={style}
-
+            defaultValue={defaultValue}
+            className={className}
           />
         )
       }}

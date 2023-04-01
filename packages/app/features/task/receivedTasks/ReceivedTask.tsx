@@ -47,7 +47,7 @@ export const ReceivedTask: React.FC = memo(() => {
         data ? (
           <ReportAndTaskView
             buttonTitle={'Отчет'}
-            manager={data.author?.email}
+            author={data.author?.email}
             heading={'Задание'}
             title={data.title}
             location={data.location}

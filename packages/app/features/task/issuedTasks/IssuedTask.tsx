@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useMemo } from 'react'
 import { createParam } from 'solito'
 import { useFindTaskByIdQuery, useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasks.api'
 import { Layout } from 'app/layouts/Layout'
@@ -6,8 +6,11 @@ import { useForm } from 'react-hook-form'
 import { setForms } from 'app/utils/typedEntries'
 import { useRouter } from 'solito/router'
 import { useNavigation } from 'solito/build/router/use-navigation'
-import { InputForm } from 'app/design/ui/InputForm/InputForm'
+import { ReportAndTaskInputForm } from 'app/design/ui/InputForm/ReportAndTaskInputForm'
 import { TEditInput } from 'app/types/editInput.types'
+import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
+import { ItemType } from 'react-native-dropdown-picker'
+import { TTaskInput } from 'app/types/task.types'
 
 
 const { useParam } = createParam()
@@ -17,72 +20,72 @@ export const IssuedTask: React.FC = memo(() => {
 
   const [id] = useParam('id')
   const { control, setValue, handleSubmit } = useForm<TEditInput>()
+  const { data: users } = useGetAllUsersQuery('')
 
-  const { data, inputData, isSuccess } = useFindTaskByIdQuery({ id: id as string }, {
-    skip: !id,
-    selectFromResult: ({ data, ...rest }) => {
-      const inputData = data ? {
-        title: data.title,
-        userList: data.userList.map(({ id }) => id),
-        location: data.location,
-        description: data.description
-      } as TEditInput : undefined
-
-      return ({
-        options: data ? data.userList.map(({ email, id }) => ({
-          label: email,
-          value: id
-        })) : [],
-        data,
-        inputData,
-        ...rest
-      })
+  const options = useMemo<ItemType<any>[]>(() => {
+    if (!users) {
+      return []
     }
+    return users.map(({ email, id }) => (
+      { label: email, value: id }))
+  }, [users])
+
+  const { data, isSuccess } = useFindTaskByIdQuery({ id: id as string }, {
+    skip: !id
   })
+
+  const inputData = useMemo(() => {
+    if (!data) return
+    const res: TEditInput = {
+      title: data.title,
+      userList: data.userList.map(({ id }) => id),
+      location: data.location,
+      description: data.description,
+      reportOfficerId: data.reportOfficerId
+    }
+    return res
+  }, [data])
+
+  const defaultSelectValue = inputData?.userList || []
+
   const navigation = useNavigation()
   const isFocused = navigation?.isFocused()
 
   useEffect(() => {
     if (isSuccess) {
       inputData && setForms<TEditInput>(inputData, setValue)
-      // inputData && setUserList(inputData.userList)
     }
   }, [isSuccess, inputData])
 
   useEffect(() => {
     if (isFocused) {
       inputData && setForms<TEditInput>(inputData, setValue)
-      // inputData && setUserList(inputData.userList)
     }
   }, [isFocused])
 
   const [update] = useUpdateTaskMutation()
 
-  const onSubmit = handleSubmit(async ({ description, location, title }) => {
-    const res = await update({ id: id as string, data: { description, location, title, phase: 'ready' } })
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await update({
+      id: id as string,
+      data: { ...data, phase: 'ready' }
+    })
     if ('data' in res) {
       push(`/`)
     }
   })
-  const onNavigateAndSubmit = handleSubmit(async ({ description, location, title }) => {
-    const res = await update({ id: id as string, data: { description, location, title } })
-    if ('data' in res) {
-      push(`/user-list/${id}/`)
-    }
-  })
-
 
   return (
-    <Layout  isHasPadding>
-      <InputForm
+    <Layout className={'bg-gray-300'} isHasPadding>
+      <ReportAndTaskInputForm
         control={control}
-        inputData={inputData}
-        onNavigate={onNavigateAndSubmit}
         onSubmit={onSubmit}
         createdAt={data?.createdAt}
         updatedAt={data?.updatedAt}
         buttonTitle={'Отправить'}
         heading={'Задание'}
+        options={options}
+        defaultValue={defaultSelectValue}
       />
     </Layout>
   )

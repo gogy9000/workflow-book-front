@@ -1,23 +1,22 @@
 import React, { memo } from 'react'
 import { Layout } from 'app/layouts/Layout'
-import { InputForm } from 'app/design/ui/InputForm/InputForm'
+import { ReportAndTaskInputForm } from 'app/design/ui/InputForm/ReportAndTaskInputForm'
 import { useEditableReport } from 'app/features/report/editableReport/useEditableReport'
 
-
+const defaultValue=[]
 export const EditableReport: React.FC = memo(() => {
-  const {control,onSubmit,inputData,createdAt,updatedAt}=useEditableReport()
-
+  const {control,onSubmit,options,createdAt,updatedAt}=useEditableReport()
   return (
     <Layout isHasPadding>
-      <InputForm
+      <ReportAndTaskInputForm
         control={control}
-        inputData={inputData}
-        onNavigate={()=>{}}
         onSubmit={onSubmit}
         createdAt={createdAt}
         updatedAt={updatedAt}
         buttonTitle={'Отправить'}
         heading={'Отчет'}
+        defaultValue={defaultValue}
+        options={options}
       />
     </Layout>
   )

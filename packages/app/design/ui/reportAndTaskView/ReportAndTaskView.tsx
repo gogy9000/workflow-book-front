@@ -8,7 +8,7 @@ interface IReportAndTaskViewProps {
   description: string
   createdAt: string
   updatedAt: string
-  manager?: string
+  author?: string
   onNavigate: () => void
   heading: string
   buttonTitle: string
@@ -21,7 +21,7 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
                                                                             description,
                                                                             updatedAt,
                                                                             createdAt,
-                                                                            manager,
+                                                                            author,
                                                                             onNavigate,
                                                                             buttonTitle
                                                                           }) => {
@@ -51,11 +51,9 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
           <VStack>
             <Text className={'font-semibold text-gray-500'}>Создано:</Text>
             <HStack className={'space-x-0.5'}>
-              {/*<Text className={'font-semibold text-gray-500'}>время</Text>*/}
               <Text className={'font-semibold'}>
                 {new Date(createdAt).toLocaleTimeString('ru')}
               </Text>
-              {/*<Text className={'font-semibold text-gray-500'}>дата</Text>*/}
               <Text className={'font-semibold'}>
                 {new Date(createdAt).toLocaleDateString('ru')}
               </Text>
@@ -64,20 +62,18 @@ export const ReportAndTaskView: React.FC<IReportAndTaskViewProps> = memo(({
           <VStack>
             <Text className={'font-semibold text-gray-500'}>Обновлено:</Text>
             <HStack className={'space-x-0.5'}>
-              {/*<Text className={'font-semibold text-gray-500'}>время</Text>*/}
               <Text className={'font-semibold'}>
                 {new Date(updatedAt).toLocaleTimeString('ru')}
               </Text>
-              {/*<Text className={'font-semibold text-gray-500'}>дата</Text>*/}
               <Text className={'font-semibold'}>
                 {new Date(updatedAt).toLocaleDateString('ru')}
               </Text>
             </HStack>
           </VStack>
-          {manager ?
+          {author ?
             (<VStack>
               <Text className={'font-semibold text-gray-500'}>Выдал:</Text>
-              <Text className={'font-semibold'}>{manager}</Text>
+              <Text className={'font-semibold'}>{author}</Text>
             </VStack>)
             : null}
           <Divider />

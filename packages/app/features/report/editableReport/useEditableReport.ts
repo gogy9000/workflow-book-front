@@ -6,6 +6,7 @@ import { createParam } from 'solito'
 import { useEffect, useMemo } from 'react'
 import { setForms } from 'app/utils/typedEntries'
 import { TReportPayload } from 'app/types/report.types'
+import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
 
 const { useParam } = createParam()
 export const useEditableReport = () => {
@@ -22,6 +23,16 @@ export const useEditableReport = () => {
     const { id, title, location, description, userList } = report
     return { id, title, location, description, userList: userList.map(({ id }) => id) }
   }, [report])
+
+  const {data:users}=useGetAllUsersQuery('')
+
+  const options=useMemo(()=>{
+    if (!users)return []
+   return  users.map(({id,email})=>({
+      label:email,
+      value:id
+    }))
+  },[])
 
   useEffect(()=>{
     if(inputData){
@@ -42,5 +53,5 @@ export const useEditableReport = () => {
     }
 
   })
-  return { control, onSubmit, inputData, createdAt: report?.createdAt, updatedAt: report?.updatedAt }
+  return { control,options, onSubmit, createdAt: report?.createdAt, updatedAt: report?.updatedAt }
 }

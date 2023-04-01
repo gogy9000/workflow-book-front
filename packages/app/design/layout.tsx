@@ -11,7 +11,7 @@ import { Row as RowNB,
   FormControl,
   Input as Inp,
   View as ViewNB,
-  Factory
+  Factory,
 } from 'native-base'
 import { SafeAreaView as SaveAreaW  } from 'react-native-safe-area-context'
 
@@ -32,8 +32,11 @@ export const Center = styled(Cent)
 export const Heading = styled(Head)
 export const FControl = styled(FormControl)
 export const Input = styled(Inp)
+
+
 export const View=styled(ViewNB)
 export const SafeAreaView=styled(Factory(SaveAreaW))
+
 
 
 
