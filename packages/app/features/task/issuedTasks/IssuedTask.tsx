@@ -78,6 +78,7 @@ export const IssuedTask: React.FC = memo(() => {
   return (
     <Layout className={'bg-gray-300'} isHasPadding>
       <ReportAndTaskInputForm
+        mode={'task'}
         control={control}
         onSubmit={onSubmit}
         createdAt={data?.createdAt}

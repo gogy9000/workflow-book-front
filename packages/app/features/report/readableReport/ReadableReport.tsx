@@ -24,7 +24,7 @@ export const ReadableReport: React.FC<IReadableReportProps> = memo(({}) => {
       {
         data ? (
           <ReportAndTaskView
-            manager={data.task?.manager?.email||''}
+            author={data.task?.author?.email||''}
             heading={'Отчет'}
             buttonTitle={'Задание'}
             title={data.title}

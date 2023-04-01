@@ -6,6 +6,7 @@ import {
   FieldValues,
   RegisterOptions
 } from 'react-hook-form'
+import { StyleProp, TextStyle } from 'react-native'
 
 export interface IFieldProps<T extends FieldValues>
   extends Omit<IInputProps, 'onChange' | 'onChangeText' | 'value'> {
@@ -15,5 +16,5 @@ export interface IFieldProps<T extends FieldValues>
     'valueAsNumber' | 'valueAsDate' | 'disabled'>
   viewClassName?: ClassValue
   label?: string
-  style?:string
+  style?:StyleProp<TextStyle>
 }

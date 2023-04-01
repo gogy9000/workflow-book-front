@@ -17,18 +17,20 @@ interface IInputFormProps {
   heading: string
   options: ItemType<any>[]
   defaultValue: any
+  mode: 'task' | 'report'
 }
 
 export const ReportAndTaskInputForm: React.FC<IInputFormProps> = memo(({
-                                                            control,
-                                                            updatedAt = '',
-                                                            createdAt = '',
-                                                            onSubmit,
-                                                            buttonTitle,
-                                                            heading,
-                                                            options,
-                                                            defaultValue
-                                                          }) => {
+                                                                         control,
+                                                                         updatedAt = '',
+                                                                         createdAt = '',
+                                                                         onSubmit,
+                                                                         buttonTitle,
+                                                                         heading,
+                                                                         options,
+                                                                         defaultValue,
+                                                                         mode
+                                                                       }) => {
 
   return (
 
@@ -68,19 +70,19 @@ export const ReportAndTaskInputForm: React.FC<IInputFormProps> = memo(({
             defaultValue={defaultValue}
           />
         </VStack>
-
-        <VStack className={'items-start'}>
-          <Text className={'font-semibold text-gray-500'}>{'Ответственный за выполнение'}:</Text>
-          <Selector<TEditInput>
-            control={control}
-            name={'reportOfficerId'}
-            isMulti={false}
-            options={options}
-            className={'w-full'}
-            defaultValue={defaultValue}
-          />
-        </VStack>
-
+        {mode === 'task' ? (
+          <VStack className={'items-start'}>
+            <Text className={'font-semibold text-gray-500'}>{'Ответственный за выполнение'}:</Text>
+            <Selector<TEditInput>
+              control={control}
+              name={'reportOfficerId'}
+              isMulti={false}
+              options={options}
+              className={'w-full'}
+              defaultValue={defaultValue}
+            />
+          </VStack>
+        ) : null}
         <VStack>
           <Text className={'font-semibold text-gray-500'}>Создано:</Text>
           <HStack className={'space-x-0.5'}>
@@ -103,12 +105,6 @@ export const ReportAndTaskInputForm: React.FC<IInputFormProps> = memo(({
             </Text>
           </HStack>
         </VStack>
-        {/*{manager ?*/}
-        {/*  (<VStack>*/}
-        {/*    <Text className={'font-semibold text-gray-500'}>Выдал:</Text>*/}
-        {/*    <Text className={'font-semibold'}>{manager}</Text>*/}
-        {/*  </VStack>)*/}
-        {/*  : null}*/}
         <Divider />
         <Button
           onPress={onSubmit}

@@ -9,6 +9,7 @@ export const EditableReport: React.FC = memo(() => {
   return (
     <Layout isHasPadding>
       <ReportAndTaskInputForm
+        mode={'report'}
         control={control}
         onSubmit={onSubmit}
         createdAt={createdAt}
