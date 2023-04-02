@@ -16,26 +16,28 @@ import Head from 'next/head'
 import React from 'react'
 
 import type { SolitoAppProps } from 'solito'
-import { NativeWindStyleSheet } from 'nativewind'
 import '../global.css'
-//
-// NativeWindStyleSheet.setOutput({
-//   default: 'native',
-// })
+import { WebNavigation } from 'app/provider/webNavigation/WebNavigation'
+import { useRouter } from 'next/router'
+
+
 
 function MyApp({ Component, pageProps }: SolitoAppProps) {
+  const {}= useRouter()
   return (
     <>
       <Head>
         <title>Solito Example App</title>
         <meta
-          name="description"
-          content="Expo + Next.js with Solito. By Fernando Rojo."
+          name='description'
+          content='Expo + Next.js with Solito. By Fernando Rojo.'
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
       <Provider>
-        <Component {...pageProps} />
+        <WebNavigation>
+          <Component {...pageProps} />
+        </WebNavigation>
       </Provider>
     </>
   )

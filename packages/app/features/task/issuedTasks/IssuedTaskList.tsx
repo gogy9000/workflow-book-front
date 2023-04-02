@@ -7,7 +7,7 @@ import { Table } from 'app/layouts/table/Table'
 import { useRouter } from 'solito/router'
 
 
-export const IssuedTaskList: React.FC = memo(({}) => {
+export const IssuedTaskList: React.FC = memo(() => {
   const {push}=useRouter()
   const { data, isLoading } = useGetAllTasksQuery({ category:'issued' })
 

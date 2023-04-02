@@ -5,7 +5,7 @@ const getTaskUrl=(param?:string)=>param?`/tasks/${param}`:'/tasks'
 
 const tasksApi=api.injectEndpoints({
   endpoints:(build)=>({
-    getAllTasks:build.query<TTaskResponse[], { category?: 'issued' | 'received' }>({
+    getAllTasks:build.query<TTaskResponse[], { category?: 'issued' | 'received'|'responsible' }>({
       query:({ category })=>({method:'get',url:getTaskUrl(category)}),
       providesTags:['updateTask','createTask','updateReport']
     }),
