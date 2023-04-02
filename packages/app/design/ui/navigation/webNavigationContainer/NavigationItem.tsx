@@ -1,10 +1,9 @@
 import React, { memo } from 'react'
-import { Text, Divider, View } from 'app/design/layout'
-import { TNavigationMenuItem } from 'app/design/ui/webNavigationContainer/types'
+import { Text, View } from 'app/design/layout'
+import { TNavigationMenuItem } from 'app/design/ui/navigation/types'
 import { useRouter } from 'next/router'
 import { MotiLink } from 'solito/moti'
 import clsx from 'clsx'
-import AnimatedView from 'react-native-reanimated/lib/types/lib/reanimated2/component/View'
 
 
 interface INavigationItemProps {

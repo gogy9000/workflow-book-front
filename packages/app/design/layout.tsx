@@ -1,3 +1,4 @@
+
 import { Row as RowNB,
   Box as BoxNB,
   Flex as FlexNB,
@@ -12,7 +13,6 @@ import { Row as RowNB,
   Input as Inp,
   View as ViewNB,
   Divider as DividerNB,
-
   Factory,
 } from 'native-base'
 import { SafeAreaView as SaveAreaW  } from 'react-native-safe-area-context'
