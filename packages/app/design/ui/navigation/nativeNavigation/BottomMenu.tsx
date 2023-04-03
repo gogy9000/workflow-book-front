@@ -14,7 +14,7 @@ export const BottomMenu: React.FC<IBottomMenuProps> = memo(({}) => {
   },[])
 
   return (
-    <HStack className={'py-3 px-2 justify-between items-center w-full  bg-black'}>
+    <HStack className={' justify-between items-stretch w-full bg-gray-200  border-t border-gray-300'}>
       {mappedMenuItems}
     </HStack>
   )

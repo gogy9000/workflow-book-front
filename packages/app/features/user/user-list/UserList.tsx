@@ -1,5 +1,4 @@
 import React, { memo, useEffect } from 'react'
-import { Layout } from 'app/layouts/Layout'
 import { Button, Heading } from 'app/design/layout'
 import { createParam } from 'solito'
 import { Table } from 'app/layouts/table/Table'
@@ -36,8 +35,6 @@ export const UserList: React.FC = memo(() => {
       data,
       ...rest
     }),
-    refetchOnMountOrArgChange:true
-
   })
 
 
@@ -67,16 +64,15 @@ export const UserList: React.FC = memo(() => {
 
   })
   return (
-    <Layout isHasPadding>
+    <>
       <Heading>Users</Heading>
       <Table
-
         headData={['назначить', 'почта', 'бан', 'причина бана']}
         bodyData={usersData}
         classNameBodyCell={"w-40"}
         classNameHeadCell={'w-40'}
       />
       <Button onPress={onSubmit}>OK</Button>
-    </Layout>
+    </>
   )
 })

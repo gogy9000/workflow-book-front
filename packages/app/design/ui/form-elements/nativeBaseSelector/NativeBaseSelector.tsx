@@ -1,8 +1,5 @@
 import React, { memo } from 'react'
 import {CheckIcon, Select } from 'native-base'
-import { Box, Center } from 'app/design/layout'
-
-
 
 interface INativeBaseSelectorProps {
 
@@ -11,8 +8,7 @@ interface INativeBaseSelectorProps {
 export const NativeBaseSelector: React.FC<INativeBaseSelectorProps> = memo(({}) => {
   const [service, setService] = React.useState('ux');
 
-  const onValueChange = itemValue => {
-
+  const onValueChange = (itemValue:string) => {
     setService(itemValue)
   }
   return (

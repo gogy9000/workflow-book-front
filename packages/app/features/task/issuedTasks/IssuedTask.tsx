@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useMemo } from 'react'
 import { createParam } from 'solito'
 import { useFindTaskByIdQuery, useUpdateTaskMutation } from 'app/api/services/tasks/endpoints/tasks.api'
-import { Layout } from 'app/layouts/Layout'
 import { useForm } from 'react-hook-form'
 import { setForms } from 'app/utils/typedEntries'
 import { useRouter } from 'solito/router'
@@ -10,7 +9,6 @@ import { ReportAndTaskInputForm } from 'app/design/ui/InputForm/ReportAndTaskInp
 import { TEditInput } from 'app/types/editInput.types'
 import { useGetAllUsersQuery } from 'app/api/services/users/users.api'
 import { ItemType } from 'react-native-dropdown-picker'
-import { TTaskInput } from 'app/types/task.types'
 
 
 const { useParam } = createParam()
@@ -76,7 +74,6 @@ export const IssuedTask: React.FC = memo(() => {
   })
 
   return (
-    <Layout className={'bg-gray-300'} isHasPadding>
       <ReportAndTaskInputForm
         mode={'task'}
         control={control}
@@ -88,6 +85,5 @@ export const IssuedTask: React.FC = memo(() => {
         options={options}
         defaultValue={defaultSelectValue}
       />
-    </Layout>
   )
 })

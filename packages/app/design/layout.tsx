@@ -13,6 +13,7 @@ import { Row as RowNB,
   Input as Inp,
   View as ViewNB,
   Divider as DividerNB,
+  ScrollView as ScrollViewNB,
   Factory,
 } from 'native-base'
 import { SafeAreaView as SaveAreaW  } from 'react-native-safe-area-context'
@@ -22,6 +23,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 
 export const SelectorPicker=Factory(DropDownPicker)
 
+export const ScrollView=styled(ScrollViewNB)
 export const Row = styled(RowNB )
 export const Box = styled(BoxNB )
 export const Flex = styled(FlexNB )

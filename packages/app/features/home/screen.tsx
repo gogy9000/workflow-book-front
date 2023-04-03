@@ -1,6 +1,5 @@
 import { IssuedTaskList } from 'app/features/task/issuedTasks/IssuedTaskList'
-import { Box } from 'app/design/layout'
-import { Layout } from 'app/layouts/Layout'
+import { Box, Divider, ScrollView } from 'app/design/layout'
 import React from 'react'
 import { ReceivedTaskList } from 'app/features/task/receivedTasks/ReceivedTaskList'
 import { OfficerTaskList } from 'app/features/task/officerTasks/OficcerTaskList'
@@ -9,13 +8,16 @@ import { OfficerTaskList } from 'app/features/task/officerTasks/OficcerTaskList'
 export function HomeScreen() {
 
   return (
-    <Layout isHasPadding>
-      <Box className={'flex-1 bg-gray-100'}>
+    <ScrollView>
+      <Box className={'flex-1'}>
         <IssuedTaskList />
+        <Divider className={'mt-2'}/>
         <ReceivedTaskList />
+        <Divider className={'mt-2'}/>
         <OfficerTaskList />
       </Box>
-    </Layout>
+    </ScrollView>
+
 
   )
 }

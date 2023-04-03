@@ -1,5 +1,4 @@
 import React, { memo, useMemo } from 'react'
-import { Layout } from 'app/layouts/Layout'
 import { useFindTaskByIdQuery } from 'app/api/services/tasks/endpoints/tasks.api'
 import { createParam } from 'solito'
 import { Spinner } from 'native-base'
@@ -45,9 +44,8 @@ export const OfficerTask: React.FC = memo(() => {
   if (isLoading) {
     return <Spinner size={'lg'} />
   }
-  console.log(data)
   return (
-    <Layout isLoading={isLoading} className={'bg-gray-200'} isHasPadding>
+    <>
       {
         data ? (
           <ReportAndTaskView
@@ -65,6 +63,6 @@ export const OfficerTask: React.FC = memo(() => {
           />
         ) : null
       }
-    </Layout>
+    </>
   )
 })

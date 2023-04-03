@@ -1,6 +1,5 @@
 import React, { memo, useMemo } from 'react'
 import { ReportAndTaskView } from 'app/design/ui/reportAndTaskView/ReportAndTaskView'
-import { Layout } from 'app/layouts/Layout'
 import { useFindReportByIdQuery } from 'app/api/services/report/endpoints/report.api'
 import { createParam } from 'solito'
 import { useRouter } from 'solito/router'
@@ -29,7 +28,7 @@ export const ReadableReport: React.FC<IReadableReportProps> = memo(({}) => {
     push(`/received-task/${data.taskId}`)
   }
   return (
-    <Layout className={'bg-gray-200'} isHasPadding>
+    <>
       {
         data ? (
           <ReportAndTaskView
@@ -47,6 +46,6 @@ export const ReadableReport: React.FC<IReadableReportProps> = memo(({}) => {
         ) : null
       }
 
-    </Layout>
+    </>
   )
 })

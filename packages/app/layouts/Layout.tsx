@@ -11,7 +11,6 @@ interface ILayout {
   className?: string
   style?: ViewStyle
   isHasPadding?: boolean
-  isLoading?: boolean
 }
 
 export const Layout: React.FC<PropsWithChildren<ILayout>> = memo(
@@ -21,11 +20,11 @@ export const Layout: React.FC<PropsWithChildren<ILayout>> = memo(
       <SafeAreaView className='flex-1'>
         <View
           className={cn('flex-1', className, {
-            'px-6': isHasPadding
+            'px-1': isHasPadding
           })}
           style={[
             {
-              paddingTop: Platform.OS === 'ios' ? top / 6 :Platform.OS==='android'? top * 0.3:10
+              paddingTop: Platform.OS === 'ios' ? top / 6 :Platform.OS==='android'? top * 0.1:10
             },
             style
           ]}

@@ -2,7 +2,7 @@ import { TNavigationMenuItem } from 'app/design/ui/navigation/types'
 
 export const navigationData: TNavigationMenuItem[] = [
   { iconName: 'home', title: 'Главная', link: '/' },
-  { iconName: 'bar-chart', title: 'Выданные наряды', link: '/issued-task-list' },
-  { iconName: 'search', title: 'Полученные наряды', link: '/received-task-list' },
-  { iconName: 'heart', title: 'Ответственные наряды', link: '/responsible-task-list' }
+  { iconName: 'chevrons-up', title: 'Выданные', link: '/issued-task-list' },
+  { iconName: 'chevrons-down', title: 'Полученные', link: '/received-task-list' },
+  { iconName: 'alert-octagon', title: 'Ответственные', link: '/responsible-task-list' }
 ]
