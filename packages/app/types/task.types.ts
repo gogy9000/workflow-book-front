@@ -29,7 +29,8 @@ export type TTaskPayload = Partial<{
   'location': string,
   'description': string,
   'userList': number[],
-  'reportOfficerId': number|null,
+  'reportOfficerId': number | null,
   'phase': 'creation' | 'ready'
+  'overTaskId': number
 }>
 

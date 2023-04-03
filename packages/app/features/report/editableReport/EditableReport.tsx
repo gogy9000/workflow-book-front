@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { ReportAndTaskInputForm } from 'app/design/ui/InputForm/ReportAndTaskInputForm'
 import { useEditableReport } from 'app/features/report/editableReport/useEditableReport'
 
-const defaultValue=[]
+const defaultValue:any[]=[]
 export const EditableReport: React.FC = memo(() => {
   const {control,onSubmit,options,createdAt,updatedAt}=useEditableReport()
   return (

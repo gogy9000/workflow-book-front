@@ -66,7 +66,7 @@ export const IssuedTask: React.FC = memo(() => {
   const onSubmit = handleSubmit(async (data) => {
     const res = await update({
       id: id as string,
-      data: { ...data, phase: 'ready' }
+      data: { ...data, phase: 'ready'}
     })
     if ('data' in res) {
       push(`/`)
